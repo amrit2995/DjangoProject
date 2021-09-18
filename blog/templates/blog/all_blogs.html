@@ -1,0 +1,18 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+{% block content %}
+    <title>All Blogs</title>
+  <body>
+      <h4> Amrit has written {{ blogs.count }} blog{{blogs.count | pluralize}}</h4>
+      <a href="{% static 'blog/amrit_CV_08062021.pdf' %}">resume </a>
+      <h1>Blogs</h1>
+      <img src="{% static 'blog/kakashi.JPG' %}" alt="not load">
+      {% for blog in blogs %}
+      <a href="{% url 'blog:detail' blog.id %}"><h2>{{ blog.title }}</h2></a>
+      <h5>{{ blog.date|date:"M d Y"|upper }}</h5>
+      <p>{{ blog.description | striptags |truncatechars:100 }}
+      <a href="{% url 'blog:detail' blog.id %}">read more</a>
+      </p>
+      {% endfor %}
+  </body>
+{% endblock %}
